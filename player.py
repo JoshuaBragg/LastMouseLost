@@ -21,12 +21,20 @@ class RandomPlayer(Player):
 
 class HumanPlayer(Player):
     def move(self):
-        pr = int(input('Row: '))
-        pa = int(input('Amount: '))
-        while self.board.row_empty(pr) or pa <= 0 or pr < 0 or pr > 5:
-            print('Invalid move')
+        try:
             pr = int(input('Row: '))
             pa = int(input('Amount: '))
+        except ValueError:
+            pr = -1
+            pa = -1
+        while pr > 5 or self.board.row_empty(pr) or pa <= 0 or pr < 0:
+            print('Invalid move')
+            try:
+                pr = int(input('Row: '))
+                pa = int(input('Amount: '))
+            except ValueError:
+                pr = -1
+                pa = -1
         return (pr, pa)
         
     def __str__(self):
