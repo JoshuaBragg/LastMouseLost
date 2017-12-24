@@ -23,14 +23,14 @@ class Node:
 							for a in range(self.board.spot_avail(r)):
 								tempb = self.board.dupe()
 								tempb.update_b(r, a+1)
-								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
+								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.real_val(self.board)))
 				else:
 					for r in range(4):
 						if not self.board.row_empty(r):
 							for a in range(self.board.spot_avail(r)):
 								tempb = self.board.dupe()
 								tempb.update_b(r, a+1)
-								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
+								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.real_val(self.board)))
 			else:
 				if self.board.b[2] == self.board.b[3]:
 					for r in [0, 1, 2, 4]:
@@ -38,14 +38,14 @@ class Node:
 							for a in range(self.board.spot_avail(r)):
 								tempb = self.board.dupe()
 								tempb.update_b(r, a+1)
-								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
+								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.real_val(self.board)))
 				else:
 					for r in [0, 1, 2, 3, 4]:
 						if not self.board.row_empty(r):
 							for a in range(self.board.spot_avail(r)):
 								tempb = self.board.dupe()
 								tempb.update_b(r, a+1)
-								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
+								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.real_val(self.board)))
 		else:
 			if self.board.b[1] == self.board.b[4]:
 				if self.board.b[2] == self.board.b[3]:
@@ -54,14 +54,14 @@ class Node:
 							for a in range(self.board.spot_avail(r)):
 								tempb = self.board.dupe()
 								tempb.update_b(r, a+1)
-								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
+								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.real_val(self.board)))
 				else:
 					for r in [0, 1, 2, 3, 5]:
 						if not self.board.row_empty(r):
 							for a in range(self.board.spot_avail(r)):
 								tempb = self.board.dupe()
 								tempb.update_b(r, a+1)
-								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
+								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.real_val(self.board)))
 			else:
 				if self.board.b[2] == self.board.b[3]:
 					for r in [0, 1, 2, 4, 5]:
@@ -69,14 +69,14 @@ class Node:
 							for a in range(self.board.spot_avail(r)):
 								tempb = self.board.dupe()
 								tempb.update_b(r, a+1)
-								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
+								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.real_val(self.board)))
 				else:
 					for r in range(6):
 						if not self.board.row_empty(r):
 							for a in range(self.board.spot_avail(r)):
 								tempb = self.board.dupe()
 								tempb.update_b(r, a+1)
-								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
+								self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.real_val(self.board)))
 
 		# if self.depth >= 0 and self.val == 0:
 		# 	for r in range(6):
@@ -86,27 +86,31 @@ class Node:
 		# 				tempb.update_b(r, a+1)
 		# 				self.children.append(Node(self.depth - 1, -1*self.pnum, tempb, (r, a+1), self.RealVal(self.board)))
 
-	def RealVal(self, b):
+	def real_val(self, b):
 		if b.g_o():
 			return maxsize * -1 * self.pnum
 		elif b.one_left() or b.win_board():
 			return maxsize * self.pnum
 		return 0
 
-def MinMax(node, depth, pnum):
+
+def min_max(node, depth, pnum):
 	if (depth == 0) or (abs(node.val) == maxsize):
 		return node.val
 
-	bestV = maxsize * -pnum
+	best_val = maxsize * -pnum
 
 	for child in node.children:
-		val = MinMax(child, depth - 1, -1 * pnum)
-		if abs(maxsize * pnum - val) < abs(maxsize * pnum - bestV):
-			bestV = val
+		val = min_max(child, depth - 1, -1 * pnum)
+		if abs(maxsize * pnum - val) < abs(maxsize * pnum - best_val):
+			best_val = val
+		# if bestV == maxsize*pnum:
+		#	break
 
-	return bestV
+	return best_val
 
-def goodDepth(b):
+
+def good_depth(b):
 	l = b.num_row()
 	s = 0
 	for i in l:

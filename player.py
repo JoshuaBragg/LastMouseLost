@@ -1,5 +1,5 @@
 from random import randint as rand
-from smart_player import Node, MinMax, goodDepth
+from smart_player import Node, min_max, good_depth
 from sys import maxsize
 
 
@@ -56,20 +56,22 @@ class SmartPlayer(Player):
 		return (r, rand(1, self.board.spot_avail(r)) + 1)
 
 	def move(self):
-		depth = goodDepth(self.board)
+		depth = good_depth(self.board)
 		node = Node(depth, -1*self.pn, self.board)
 
-		bC = (0, -1)
-		bV = -1 * self.pn * maxsize
+		best_choice = (0, -1)
+		best_val = -1 * self.pn * maxsize
 		for child in node.children:
-			i_val = MinMax(child, depth, -1 * self.pn)
-			if abs(maxsize * self.pn - i_val) < abs(maxsize * self.pn - bV):
-				bV = i_val
-				bC = child.move
-		if bC == (0, -1):
+			i_val = min_max(child, depth, -1 * self.pn)
+			if abs(maxsize * self.pn - i_val) < abs(maxsize * self.pn - best_val):
+				best_val = i_val
+				best_choice = child.move
+			# if bV == self.pn*maxsize:
+			# 	break
+		if best_choice == (0, -1):
 			h = self._rmove()
-			bC = h
-		return bC
+			best_choice = h
+		return best_choice
 
 	def __str__(self):
 		return 'Smart Player'
