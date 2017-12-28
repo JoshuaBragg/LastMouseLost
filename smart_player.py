@@ -122,9 +122,9 @@ def good_depth(b):
 		if i > 0:
 			r += 1
 	if r > 4 and s > 15:
-		return 3
+		return 2
 	if r > 3 and s > 10:
 		return 4
 	if r > 3:
-		return 5
-	return 6
+		return 6
+	return 8

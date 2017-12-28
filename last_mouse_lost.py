@@ -15,9 +15,6 @@ class Game:
 	def game_over(self):
 		return self.b.g_o()
 
-	def dupe(self):
-		return self.b.dupe()
-
 	def run_game(self, num_h, num_r, num_s):
 		t = 0
 		l = []
@@ -39,7 +36,7 @@ class Game:
 					f'-----------------\n')
 				if self.game_over():
 					print(f'\n\n{playr} {l.index(playr)} Lost')
-					break
+					return l.index(playr)
 
 
 if __name__ == '__main__':
