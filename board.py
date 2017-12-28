@@ -30,7 +30,7 @@ class Board:
 
 	def draw(self):
 		for i in range(len(self.b)):
-			print(f'{i}' + ' '*(int(fl((i-2.5)**2)+4)), end='')
+			print(str(i) + ' '*(int(fl((i-2.5)**2)+4)), end='')
 			for c in self.b[i]:
 				print(c, end='   ')
 			print()

@@ -32,10 +32,9 @@ class Game:
 				self.draw_board()
 				plm = playr.move()
 				self.make_move(plm[0], plm[1])
-				print(f'\n{playr} {l.index(playr)} made move ({plm[0]}, {plm[1]})\n\n----------------------------------'
-					f'-----------------\n')
+				print('\n' + str(playr) + ' ' + str(l.index(playr)) + ' made move (' + str(plm[0]) + ', ' + str(plm[1]) + ')\n\n---------------------------------------------------\n')
 				if self.game_over():
-					print(f'\n\n{playr} {l.index(playr)} Lost')
+					print('\n\n' + str(playr) + ' ' + str(l.index(playr)) + ' Lost')
 					return l.index(playr)
 
 
