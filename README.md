@@ -2,7 +2,7 @@
 Computer Implementation of Board Game called 'Last Mouse Lost' from www.FoxMind.com
 
 # Instructions
-The files needed to run the newest version of the game are 'last_mouse_lost.py', 'player.py' and 'board.py'. Run 'last_mouse_lost.py' with python in console to play the game.
+The files needed to run the newest version of the game are 'last_mouse_lost.py', 'player.py' and 'board.py'. Run 'last_mouse_lost.py' with python in console to play the game. __OR__ If you do not have python installed you can download and run the last_mouse_lost.exe file to run the game.
 
 The object of the game is to not select the last dot. You want your opponent to select the last dot on the board in order to win. The game doesn't allow you to make invalid moves. You can select as many as you want from one row, you must select at least one dot and the dots you select must be from the same row. Input a row number and an amount of dots you want to select.
 
