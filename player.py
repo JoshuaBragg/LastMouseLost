@@ -72,10 +72,6 @@ class SmartPlayer(Player):
 					m = self.board.spot_avail(i)
 					r = i
 			return (r, m - 1)
-		elif cur_b == {0: 1, 1: 5}:
-			for i in range(len(self.board)):
-				if self.board.spot_avail(i) == 1:
-					return (i, 1)
 		else:
 			if self.board.b[0] != self.board.b[5]:
 				return self.board.diff(0, 5)
